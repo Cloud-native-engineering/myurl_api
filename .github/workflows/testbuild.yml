@@ -8,7 +8,7 @@ name: Demo Push
 on: [push]
   # This creates an environment variable called `IMAGE_NAME ` with the value `ghtoken_product_demo`.
 env:
-  IMAGE_NAME: myurlAPI
+  IMAGE_NAME: myurlapi
 #
 jobs:
   # This pushes the image to GitHub Packages.
