@@ -1,12 +1,21 @@
-From python:3.12-slim
+# Base python package
+FROM python:3.10.0-alpine
 
+# Working directory
 WORKDIR /app
 
-ENV FLASK_DEBUG=1
+# Copy the dependencies
+COPY requirements.txt requirements.txt
 
-COPY . .
+# Install requirements & install Gunicorn  
+RUN pip install -r requirements.txt && pip install gunicorn==21.2
 
-RUN pip install -r requirements.txt
+# for flask web server
+EXPOSE 5000
 
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
+# add files
+ADD . /app
 
+# This is the runtime command for the container
+# Add below line if not using docker-compose
+CMD gunicorn --preload -w 1 -b 0.0.0.0:5000 wsgi:app
