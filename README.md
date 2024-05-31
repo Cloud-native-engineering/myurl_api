@@ -1,6 +1,7 @@
 # MyURL Backend-API
 
 [![Unit Test Cases](https://github.com/Cloud-native-engineering/myurl_api/actions/workflows/testcases.yml/badge.svg)](https://github.com/Cloud-native-engineering/myurl_api/actions/workflows/testcases.yml)
+[![Build and Push Container Image](https://github.com/Cloud-native-engineering/myurl_api/actions/workflows/containerbuild.yml/badge.svg)](https://github.com/Cloud-native-engineering/myurl_api/actions/workflows/containerbuild.yml)
 
 This is a backend API for the MyURL service, a URL shortener. It provides endpoints for creating, retrieving, updating, and deleting shortened URLs. Built with Flask and SQLAlchemy, it offers a robust and flexible solution for managing and interacting with the URL data.
 
