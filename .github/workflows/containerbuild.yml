@@ -8,7 +8,7 @@ on:
       - completed
   pull_request_review:
     types: [submitted]
-    branches: [main]
+    branches: [main, dev]
 env:
   IMAGE_NAME: myurlapi
 
@@ -41,6 +41,8 @@ jobs:
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
           # This uses the Docker `latest` tag convention.
           [ "$VERSION" == "main" ] && VERSION=latest
+          # This uses the Docker `dev` tag when built from the `dev` branch.
+          [ "$VERSION" == "testing" ] && VERSION=testing
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
