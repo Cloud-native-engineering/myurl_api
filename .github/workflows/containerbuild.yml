@@ -6,8 +6,8 @@ on:
     workflows: ["Unit Test Cases"]
     types:
       - completed
-  pull_request_review:
-    types: [submitted]
+
+  push:
     branches: [main, dev]
 env:
   IMAGE_NAME: myurlapi
