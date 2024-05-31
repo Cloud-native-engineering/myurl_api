@@ -3,3 +3,8 @@
 *.retry
 *.swp
 .vscode/*
+.idea
+venv
+app.db
+__pycache__
+.env
