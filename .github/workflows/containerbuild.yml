@@ -6,6 +6,7 @@ on:
     workflows: ["Unit Test Cases"]
     types:
       - completed
+
   push:
     branches: [main, dev]
 env:
