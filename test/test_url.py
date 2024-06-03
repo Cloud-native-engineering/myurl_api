@@ -46,7 +46,7 @@ def test_create_blacklisted_url(client):
         "Authorization": f"Bearer {token}"
     }
     data = {
-        "original_url": "https://evil.local",
+        "original_url": "https://evil.com",
         "short_url": "evil"
     }
     response = client.post('/urls/', json=data, headers=headers)
