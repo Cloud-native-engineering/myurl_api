@@ -41,6 +41,7 @@ class Restriction(db.Model):
     is_blacklisted = db.Column(db.Boolean, default=True)
     is_verified = db.Column(db.Boolean, default=False)
 
+
     @validates('is_premium', 'is_blacklisted')
     def validate_status(self, key, value):
         if key == 'is_premium' and value is False and self.is_blacklisted is False:

@@ -10,6 +10,7 @@ import boto3
 ####
 ## Utility Functions about URLs
 ####
+
 def get_domain(url):
     extracted = tldextract.extract(url)
     return f"{extracted.domain}.{extracted.suffix}"
@@ -82,6 +83,7 @@ def is_valid_url(url):
     
 def domain_verified(url):
     # Parse the URL to domain
+
     domain = get_domain(url)
     
     # Query the restriction database for the domain
@@ -95,7 +97,7 @@ def domain_verified(url):
     if restriction.is_premium or restriction.is_blacklisted:
        json_abort(400, {"error": "URL is premium or blacklisted", "url": url}) 
 
-        # If the domain is in the database and is verified, return True
+    # If the domain is in the database and is verified, return True
     if restriction.is_verified:
         return True
 

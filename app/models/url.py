@@ -23,6 +23,7 @@ class UrlOut(Schema):
     is_enabled = Boolean()
     is_verified = Boolean()
 
+
 class ShareUrlIn(Schema):
     username = String(required=True, validate=Length(min=1, max=50))
 
@@ -39,5 +40,6 @@ class Url(db.Model):
     expires_at = db.Column(db.DateTime)
     is_enabled = db.Column(db.Boolean, default=True)
     is_verified = db.Column(db.Boolean, default=False)
+
 
     users = db.relationship('User', secondary='manages', back_populates='urls', cascade="all, delete", passive_deletes=True)
