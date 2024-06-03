@@ -60,7 +60,8 @@ def create_url(json_data: dict):
     is_valid_url(json_data['original_url'])
 
     # Check if Domain is blacklisted or premium
-    domain_verified(json_data['original_url'])
+    if domain_verified(json_data['original_url']):
+            json_data['is_verified'] = True
 
     # Check if the URL is valid
     is_valid_short_url(json_data['short_url'])
@@ -75,7 +76,7 @@ def create_url(json_data: dict):
     db.session.add(manage)
     db.session.commit()
     
-    current_app.queue_feed.send_message('create', url.original_url, url.short_url)
+    current_app.queue_feed.send_message('create', url.original_url, url.short_url, url.is_verified)
 
     return url
 
@@ -107,14 +108,15 @@ def update_url(url_id: int, json_data: dict):
     # Check if the original_url is valid
     if 'original_url' in json_data:
         is_valid_url(json_data['original_url'])
-        domain_verified(json_data['original_url']) 
+        if domain_verified(json_data['original_url']):
+            json_data['is_verified'] = True
 
     # Update the URL
     for attr, value in json_data.items():
         setattr(url, attr, value)
     db.session.commit()
 
-    current_app.queue_feed.send_message('update', url.original_url, url.short_url)
+    current_app.queue_feed.send_message('update', url.original_url, url.short_url, url.is_verified)
     
     return url
 
@@ -135,7 +137,7 @@ def delete_url(url_id: int):
     db.session.delete(url)
     db.session.commit()
     
-    current_app.queue_feed.send_message('delete', url.original_url, url.short_url)
+    current_app.queue_feed.send_message('delete', url.original_url, url.short_url, url.is_verified)
     return None
 
 # Share URL with another user

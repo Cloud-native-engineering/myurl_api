@@ -17,12 +17,12 @@ users = [
 ]
 
 urls = [
-    {'original_url': 'https://www.testcorp.local', 'short_url': 'test1'},
-    {'original_url': 'https://www.testcorp.local', 'short_url': 'test2'},
-    {'original_url': 'https://www.testcorp.local', 'short_url': 'test3'},
-    {'original_url': 'https://www.testcorp.local', 'short_url': 'test4'},
-    {'original_url': 'https://www.testcorp.local', 'short_url': 'test5'},
-    {'original_url': 'https://www.testcorp.local', 'short_url': 'test6'}
+    {'original_url': 'https://www.testcorp.com', 'short_url': 'test1'},
+    {'original_url': 'https://www.testcorp.com', 'short_url': 'test2'},
+    {'original_url': 'https://www.testcorp.com', 'short_url': 'test3'},
+    {'original_url': 'https://www.testcorp.com', 'short_url': 'test4'},
+    {'original_url': 'https://www.testcorp.com', 'short_url': 'test5'},
+    {'original_url': 'https://www.testcorp.com', 'short_url': 'test6'}
 ]
 
 manages = [
@@ -36,8 +36,8 @@ manages = [
 restrictions = [
     {'short_url': 'XYZ', 'is_blacklisted': True},
     {'short_url': 'ZYZ', 'is_premium': True, 'is_blacklisted': False},
-    {'domain': 'evil.local', 'is_blacklisted': True},
-    {'domain': 'unsecure.local', 'is_blacklisted': True}
+    {'domain': 'evil.com', 'is_blacklisted': True},
+    {'domain': 'unsecure.com', 'is_blacklisted': True}
 ]
 
 

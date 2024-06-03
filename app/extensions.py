@@ -8,8 +8,9 @@ class QueueFeed:
         self.sqs = boto3.client('sqs', region_name=region_name)
         self.queue_url = queue_url
 
-    def send_message(self, action, original_url, short_url):
-        message_body = f"{{\"action\": \"{action}\", \"original_url\": \"{original_url}\", \"short_url\": \"{short_url}\"}}"
+
+    def send_message(self, action, original_url, short_url, is_verified):
+        message_body = f"{{\"action\": \"{action}\", \"original_url\": \"{original_url}\", \"short_url\": \"{short_url}\", \"is_verified\": \"{is_verified}\"}}"
         response = self.sqs.send_message(
             QueueUrl=self.queue_url,
             MessageBody=message_body
