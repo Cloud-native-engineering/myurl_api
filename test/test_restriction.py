@@ -27,7 +27,7 @@ def test_create_restriction(client):
         "Authorization": f"Bearer {token}"
     }
     data = {
-        "domain": "mybaddomain.local",
+        "domain": "mybaddomain.com",
         "is_blacklisted": True
     }  
     response = client.post('/restrictions/', json=data, headers=headers)
@@ -43,7 +43,7 @@ def test_blacklisted(client):
     }
     response = client.get('/restrictions/blacklisted', headers=headers)
     assert response.status_code == 200
-    assert 'evil.local' in response.json['domains']
+    assert 'evil.com' in response.json['domains']
     assert 'XYZ' in response.json['short_urls']
 
 def test_premium(client):
