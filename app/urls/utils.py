@@ -4,12 +4,16 @@ from app.models.manage import Manage
 from app.users.utils import is_user
 from app.utils import json_abort
 import re
-from urllib.parse import urlparse
+import tldextract
 import boto3
 
 ####
 ## Utility Functions about URLs
 ####
+def get_domain(url):
+    extracted = tldextract.extract(url)
+    return f"{extracted.domain}.{extracted.suffix}"
+
 def is_manager(auth0_id, url_id):
     # Check if the user exists
     user = is_user(auth0_id)
@@ -78,18 +82,22 @@ def is_valid_url(url):
     
 def domain_verified(url):
     # Parse the URL to domain
-    domain = urlparse(url).netloc
+    domain = get_domain(url)
     
     # Query the restriction database for the domain
     restriction = Restriction.query.filter(Restriction.domain.like(f"%{domain}")).first()
 
     # If the domain is not in the database, return False
     if restriction is None:
-        return True
+        return False
 
     # If the domain is in the database and is premium and not blacklisted, return True
     if restriction.is_premium or restriction.is_blacklisted:
        json_abort(400, {"error": "URL is premium or blacklisted", "url": url}) 
+
+        # If the domain is in the database and is verified, return True
+    if restriction.is_verified:
+        return True
 
     # If the domain is in the database but is not premium or is blacklisted, return False
     return False

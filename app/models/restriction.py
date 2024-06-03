@@ -39,6 +39,7 @@ class Restriction(db.Model):
     domain = db.Column(db.String(254))
     is_premium = db.Column(db.Boolean, default=False)
     is_blacklisted = db.Column(db.Boolean, default=True)
+    is_verified = db.Column(db.Boolean, default=False)
 
     @validates('is_premium', 'is_blacklisted')
     def validate_status(self, key, value):
