@@ -134,6 +134,9 @@ def delete_url(url_id: int):
     # Get the URL
     url = is_url(url_id)
     
+    # Delete the related records in the manage table
+    Manage.query.filter_by(url_id=url_id).delete()
+
     db.session.delete(url)
     db.session.commit()
     
