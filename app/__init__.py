@@ -27,19 +27,19 @@ def create_app(config_class=Config):
 
     # Blueprints registrieren
     from app.users import bp as users_bp
-    app.register_blueprint(users_bp, url_prefix='/users')
+    app.register_blueprint(users_bp, url_prefix='/api/users')
 
     from app.urls import bp as urls_bp
-    app.register_blueprint(urls_bp, url_prefix='/urls')
+    app.register_blueprint(urls_bp, url_prefix='/api/urls')
 
     from app.restrictions import bp as restrictions_bp
-    app.register_blueprint(restrictions_bp, url_prefix='/restrictions')
+    app.register_blueprint(restrictions_bp, url_prefix='/api/restrictions')
     
     # Datenbanktabellen anlegen
     with app.app_context():
         db.create_all()
 
-    @app.route('/')
+    @app.route('/api/')
     @app.doc(security='bearerAuth')
     @authorization_guard
     def test_page():
