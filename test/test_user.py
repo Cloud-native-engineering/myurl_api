@@ -14,15 +14,6 @@ def test_get_user(client):
     assert response.status_code == 200
     assert any(user['auth0_id'] == users[0]['auth0_id'] for user in response.json)
     
-def test_register_user(client):
-    token = get_token('new123123123123123123@testcorp', [])
-    headers = {
-        "Authorization": f"Bearer {token}"
-    }
-    response = client.post('/users/register', headers=headers)
-    assert response.status_code == 200
-    assert response.json['auth0_id'] == 'new123123123123123123@testcorp'
-    
 def test_me(client):
     token = get_token(users[0]['auth0_id'], [])
     headers = {

@@ -38,7 +38,7 @@ def get_url(url_id: int):
 def get_urls():
     # Read the payload using the read_payload function
     payload = read_payload()
-    user = User.query.filter_by(auth0_id=payload.get('sub')).first_or_404()
+    user = is_user(payload.get('sub'))
     return user.urls
 
 @bp.post('/')
@@ -102,11 +102,11 @@ def update_url(url_id: int, json_data: dict):
     url = is_url(url_id)
     
     # Check if the short_url is valid
-    if 'short_url' in json_data:
+    if 'short_url' in json_data and json_data['short_url'] != url.short_url:
         is_valid_short_url(json_data['short_url'])    
 
     # Check if the original_url is valid
-    if 'original_url' in json_data:
+    if 'original_url' in json_data and json_data['original_url'] != url.original_url:
         is_valid_url(json_data['original_url'])
         if domain_verified(json_data['original_url']):
             json_data['is_verified'] = True
