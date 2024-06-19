@@ -10,7 +10,7 @@ def test_get_restrictions(client):
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    response = client.get('/restrictions/', headers=headers)
+    response = client.get('/api/restrictions/', headers=headers)
     assert response.status_code == 200
 
 def test_get_restrictions_negative(client):
@@ -18,7 +18,7 @@ def test_get_restrictions_negative(client):
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    response = client.get('/restrictions/', headers=headers)
+    response = client.get('/api/restrictions/', headers=headers)
     assert response.status_code == 403
     
 def test_create_restriction(client):
@@ -30,7 +30,7 @@ def test_create_restriction(client):
         "domain": "mybaddomain.com",
         "is_blacklisted": True
     }  
-    response = client.post('/restrictions/', json=data, headers=headers)
+    response = client.post('/api/restrictions/', json=data, headers=headers)
     assert response.status_code == 200
     assert response.json['domain'] == data['domain']
     assert response.json['is_blacklisted'] == data['is_blacklisted']
@@ -41,7 +41,7 @@ def test_blacklisted(client):
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    response = client.get('/restrictions/blacklisted', headers=headers)
+    response = client.get('/api/restrictions/blacklisted', headers=headers)
     assert response.status_code == 200
     assert 'evil.com' in response.json['domains']
     assert 'XYZ' in response.json['short_urls']
@@ -51,7 +51,7 @@ def test_premium(client):
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    response = client.get('/restrictions/premium', headers=headers)
+    response = client.get('/api/restrictions/premium', headers=headers)
     assert response.status_code == 200
     assert 'ZYZ' in response.json['short_urls']
     
@@ -60,7 +60,7 @@ def test_delete_restriction(client):
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    response = client.delete('/restrictions/1', headers=headers)
+    response = client.delete('/api/restrictions/1', headers=headers)
     assert response.status_code == 204
     
 def test_delete_restriction_negative(client):
@@ -68,7 +68,7 @@ def test_delete_restriction_negative(client):
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    response = client.delete('/restrictions/1', headers=headers)
+    response = client.delete('/api/restrictions/1', headers=headers)
     assert response.status_code == 403
 
 def test_get_restrictions_id(client):
@@ -76,7 +76,7 @@ def test_get_restrictions_id(client):
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    response = client.get('/restrictions/2', headers=headers)
+    response = client.get('/api/restrictions/2', headers=headers)
     assert response.status_code == 200
     assert response.json['short_url'] == restrictions[1]['short_url']
 
@@ -88,7 +88,7 @@ def test_patch_restriction(client):
     data = {
         "is_blacklisted": False
     }
-    response = client.patch('/restrictions/2', json=data, headers=headers)
+    response = client.patch('/api/restrictions/2', json=data, headers=headers)
     assert response.status_code == 200
     assert response.json['is_blacklisted'] == False
  

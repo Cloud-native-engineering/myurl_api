@@ -10,7 +10,7 @@ def test_get_user(client):
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    response = client.get('/users/', headers=headers)
+    response = client.get('/api/users/', headers=headers)
     assert response.status_code == 200
     assert any(user['auth0_id'] == users[0]['auth0_id'] for user in response.json)
     
@@ -19,6 +19,6 @@ def test_me(client):
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    response = client.get('/users/me', headers=headers)
+    response = client.get('/api/users/me', headers=headers)
     assert response.status_code == 200
     assert response.json['auth0_id'] == users[0]['auth0_id']
