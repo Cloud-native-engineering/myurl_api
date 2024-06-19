@@ -10,7 +10,7 @@ def test_validate_jwt(client):
     headers = {
         "Authorization": f"Bearer {token}"
     }
-    response = client.get('/', headers=headers)
+    response = client.get('/api/', headers=headers)
     assert response.status_code == 200
     assert response.json == {'message': 'MyURLs API', 'version': '1.0.0'}
 
@@ -19,5 +19,5 @@ def test_validate_jwt_negative(client):
     headers = headers = {
         "Authorization": f"Bearer not_a_valid_token"
     }
-    response = client.get('/', headers=headers)
+    response = client.get('/api/', headers=headers)
     assert response.status_code == 401
