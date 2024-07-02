@@ -10,7 +10,7 @@ from app.models.manage import Manage
 ## Schemas for OpenAPI and validation
 ####
 class UrlIn(Schema):
-    original_url = String(required=True, validate=Length(min=1, max=50))
+    original_url = String(required=True, validate=Length(min=1, max=254))
     short_url = String(required=True, validate=Length(min=1, max=50))
 
 class UrlOut(Schema):
