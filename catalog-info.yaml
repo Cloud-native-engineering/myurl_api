@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: myurl-api
+  description: API for the myurl service
+  tags:
+    - url-shortener
+    - python
+    - flask
+spec:
+  system: myurl
+  type: openapi
+  lifecycle: production
+  owner: myurl-dev
+  definition:
+    $openapi: ./openapi.json
