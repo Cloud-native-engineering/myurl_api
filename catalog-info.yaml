@@ -12,5 +12,4 @@ spec:
   type: openapi
   lifecycle: production
   owner: myurl-dev
-  definition:
-    $openapi: ./openapi.json
+  definition: https://raw.githubusercontent.com/Cloud-native-engineering/myurl_api/main/openapi.json
