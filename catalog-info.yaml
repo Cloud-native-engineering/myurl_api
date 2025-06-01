@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: myurl-api
-  description: API for the myurl service
+  description: "API for the myurl service"
   tags:
     - url-shortener
     - python
